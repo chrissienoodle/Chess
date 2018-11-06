@@ -4,6 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        final int BLANC = 0;
+        final int NOIR = 1;
+
         //création du plateau
         final int SIZE = 8;
         String plateau[][] = new String[SIZE][SIZE];
@@ -20,21 +23,23 @@ public class Main {
         }
         for (int i=2; i<(SIZE-2);i++){
             for (int j=0; j<SIZE; j++){
-                plateau[i][j] = " ";
+                plateau[i][j] = " " + " ";
             }
         }
 
         //déclaration des autres variables
-        boolean end = false;
+        boolean noend = true;
+        boolean userVerif = true;
         int tour = 0;
-        final String JOUEUR1 = "blanc";
-        final String JOUEUR2 = "noir";
+        final String JOUEUR_BLANC = "blanc";
+        final String JOUEUR_NOIR = "noir";
         String joueur = "";
+        Scanner sc = new Scanner(System.in);
 
         //boucle pour saisie utilisateur
         do {
-            joueur = ((tour % 2) == 0) ? JOUEUR1 : JOUEUR2;
-            Scanner in = new Scanner(System.in);
+            joueur = ((tour % 2) == 0) ? JOUEUR_BLANC : JOUEUR_NOIR;
+
 
                 //affichage du plateau
                 for (String dim1[] : plateau) {
@@ -43,12 +48,24 @@ public class Main {
                     }
                     System.out.println();
                 }
-                System.out.printf("Joueur %s, veuillez saisir les coordonnées de la pièce à déplacer", joueur);
-                int piece[] = {in.nextInt(), in.nextInt()};
+                do {
+                    System.out.printf("Joueur %s, veuillez saisir les coordonnées de la pièce à déplacer", joueur);
+                    int piece[] = {sc.nextInt(), sc.nextInt()};
+
+                    //vérification de la saisie utilisateur
+                    if (plateau[(piece[0])][(piece[1])].charAt(1) == (((tour % 2) == BLANC) ? 'B' : 'N' )){
+                        userVerif=false;
+                    }
+                    else {
+                        System.out.println("Cette saisie est erronnée.");
+                        userVerif=true;
+                    }
+                } while (userVerif);
+
                 tour++;
 
 
-        } while(!end);
+        } while(noend);
 
     }
 }
