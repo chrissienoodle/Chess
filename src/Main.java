@@ -49,15 +49,17 @@ public class Main {
                     System.out.println();
                 }
                 do {
-                    System.out.printf("Joueur %s, veuillez saisir les coordonnées de la pièce à déplacer", joueur);
+                    System.out.printf("Joueur %s, veuillez saisir les coordonnées de la pièce à déplacer \n", joueur);
                     int piece[] = {sc.nextInt(), sc.nextInt()};
 
                     //vérification de la saisie utilisateur
                     if (plateau[(piece[0])][(piece[1])].charAt(1) == (((tour % 2) == BLANC) ? 'B' : 'N' )){
+                        sc.nextLine();
                         userVerif=false;
                     }
                     else {
                         System.out.println("Cette saisie est erronnée.");
+                        sc.nextLine();
                         userVerif=true;
                     }
                 } while (userVerif);
