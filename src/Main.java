@@ -6,6 +6,7 @@ public class Main {
 
         final int BLANC = 0;
         final int NOIR = 1;
+        final String EMPTY = " " + " ";
 
         //création du plateau
         final int SIZE = 8;
@@ -23,7 +24,7 @@ public class Main {
         }
         for (int i=2; i<(SIZE-2);i++){
             for (int j=0; j<SIZE; j++){
-                plateau[i][j] = " " + " ";
+                plateau[i][j] = EMPTY;
             }
         }
 
@@ -35,6 +36,8 @@ public class Main {
         final String JOUEUR_NOIR = "noir";
         String joueur = "";
         Scanner sc = new Scanner(System.in);
+        int piece[] = {0,0};
+        int move[] = {0 ,0};
 
         //boucle pour saisies utilisateur
         do {
@@ -50,7 +53,8 @@ public class Main {
                 }
                 do {
                     System.out.printf("Joueur %s, veuillez saisir les coordonnées de la pièce à déplacer \n", joueur);
-                    int piece[] = {sc.nextInt(), sc.nextInt()};
+                    piece[0] = sc.nextInt();
+                    piece[1] = sc.nextInt();
 
                     //vérification de la saisie utilisateur
                     if ((piece[0]<0) || (piece[1]<0) || (piece[0]>(SIZE-1)) ||(piece[1]>(SIZE-1))) {
@@ -74,7 +78,8 @@ public class Main {
                 //saisie du déplacement
                 do {
                     System.out.printf("Joueur %s, veuillez saisir les coordonnées de la case où vous souhaitez placer votre pièce \n", joueur);
-                    int move[] = {sc.nextInt(), sc.nextInt()};
+                    move[0] = sc.nextInt();
+                    move[1] = sc.nextInt();
 
                     //vérification de la saisie utilisateur
                     if ((move[0]<0) || (move[1]<0) || (move[0]>(SIZE-1)) ||(move[1]>(SIZE-1))) {
@@ -83,6 +88,9 @@ public class Main {
                         userVerif = true;
                     }
                     else {
+                        //déplacement de la pièce
+                        plateau[(move[0])][(move[1])]= plateau[(piece[0])][(piece[1])];
+                        plateau[(piece[0])][(piece[1])] = EMPTY;
                         userVerif = false;
                     }
 
