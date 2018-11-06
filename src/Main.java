@@ -36,7 +36,7 @@ public class Main {
         String joueur = "";
         Scanner sc = new Scanner(System.in);
 
-        //boucle pour saisie utilisateur
+        //boucle pour saisies utilisateur
         do {
             joueur = ((tour % 2) == 0) ? JOUEUR_BLANC : JOUEUR_NOIR;
 
@@ -53,16 +53,41 @@ public class Main {
                     int piece[] = {sc.nextInt(), sc.nextInt()};
 
                     //vérification de la saisie utilisateur
-                    if (plateau[(piece[0])][(piece[1])].charAt(1) == (((tour % 2) == BLANC) ? 'B' : 'N' )){
-                        sc.nextLine();
-                        userVerif=false;
-                    }
-                    else {
+                    if ((piece[0]<0) || (piece[1]<0) || (piece[0]>(SIZE-1)) ||(piece[1]>(SIZE-1))) {
                         System.out.println("Cette saisie est erronnée.");
                         sc.nextLine();
-                        userVerif=true;
+                        userVerif = true;
+                    }
+                    else{
+
+                        if (plateau[(piece[0])][(piece[1])].charAt(1) == (((tour % 2) == BLANC) ? 'B' : 'N')) {
+                            sc.nextLine();
+                            userVerif = false;
+                        } else {
+                            System.out.println("Cette saisie est erronnée.");
+                            sc.nextLine();
+                            userVerif = true;
+                        }
                     }
                 } while (userVerif);
+
+                //saisie du déplacement
+                do {
+                    System.out.printf("Joueur %s, veuillez saisir les coordonnées de la case où vous souhaitez placer votre pièce \n", joueur);
+                    int move[] = {sc.nextInt(), sc.nextInt()};
+
+                    //vérification de la saisie utilisateur
+                    if ((move[0]<0) || (move[1]<0) || (move[0]>(SIZE-1)) ||(move[1]>(SIZE-1))) {
+                        System.out.println("Cette saisie est erronnée.");
+                        sc.nextLine();
+                        userVerif = true;
+                    }
+                    else {
+                        userVerif = false;
+                    }
+
+                } while (userVerif);
+
 
                 tour++;
 
